@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.3-jessie
 MAINTAINER Derich Pacheco <carlosderich@gmail.com>
 
 WORKDIR /server
@@ -11,4 +11,4 @@ RUN bundle install
 
 EXPOSE 8125
 
-CMD bundle exec ruby server.rb
+CMD ["./bin/server"]

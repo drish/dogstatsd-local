@@ -5,14 +5,20 @@ services:
     build: .
     volumes:
       - .:/server
-    environment:
-      - "PORT=8124"
+    ports:
+      - 8125:8125
     networks:
       - default
+      - networky
   test-client:
     build: .
     volumes:
       - .:/server
     networks:
       - default
+      - networky
     command: sleep infinity
+networks:
+  networky:
+    external:
+      name: networky

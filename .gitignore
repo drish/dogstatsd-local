@@ -35,6 +35,8 @@ build-iPhoneSimulator/
 /doc/
 /rdoc/
 
+client.rb
+
 ## Environment normalization:
 /.bundle/
 /vendor/bundle

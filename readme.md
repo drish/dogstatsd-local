@@ -3,3 +3,40 @@
 ### dogstatsd-local
 
 A simple Ruby UDP service that prints back to STDOUT DogStatsD messages in a JSON prettified format
+
+
+#### Setup 
+
+On docker-compose
+
+```
+version: '3.4'
+
+services:
+  server:
+    image: drish/dogstatsd-local
+    ports:
+      - 8125:8125/udp
+```
+
+On straight docker 
+
+```sh
+~/drish/ » docker run -p 8125:8125 drish/dogstatsd-local
+INFO -- : initialized dogstatsd-local 0.0.0.0:8125
+INFO -- : waiting for statsd datagrams..
+```
+
+
+Use your statsd client normally
+
+```ruby
+require 'datadog/statsd'
+statsd = Datadog::Statsd.new('localhost', 8125)
+statsd.increment('page.views')
+```
+
+
+```sh
+server_1       | I, [2019-09-18T18:44:38.221440 #1]  INFO -- : {"path":"page.views","namespace":"page","name":"views","value":1}
+```
