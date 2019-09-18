@@ -16,9 +16,14 @@ class Server
   def start
     t = Thread.new do
 
-      while text = server.recvfrom(16)
-        d = Datagram.new(text)
-        puts Message.log(d.message)
+      while text = server.recvfrom(16) # might need to increase this size
+
+        begin
+          d = Datagram.new(text)
+          puts JSON.pretty_generate Message.log(d.message)
+        rescue StandardError => e
+          puts e
+        end
         server.send("", 0, d.host, d.port)
       end
     end

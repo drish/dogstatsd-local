@@ -14,7 +14,8 @@ class Message
     {
       path: metric.first,
       namespace: metric.first.split('.')[0],
-      name: metric.first.split('.')[1]
+      name: metric.first.split('.')[1..metric.first.split('.').count - 1].join('.'),
+      value: metric[1].to_i,
     }
   end
 end
