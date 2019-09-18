@@ -7,9 +7,9 @@ A simple Ruby UDP service that prints back to STDOUT DogStatsD messages in a JSO
 
 #### Setup 
 
-On docker-compose
+docker-compose
 
-```
+```yml
 version: '3.4'
 
 services:
@@ -19,14 +19,13 @@ services:
       - 8125:8125/udp
 ```
 
-On straight docker 
+straight docker 
 
-```sh
+```text
 ~/drish/ » docker run -p 8125:8125 drish/dogstatsd-local
 INFO -- : initialized dogstatsd-local 0.0.0.0:8125
 INFO -- : waiting for statsd datagrams..
 ```
-
 
 Use your statsd client normally
 
