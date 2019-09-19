@@ -15,4 +15,5 @@ statsd = Datadog::Statsd.new(config[:host],
   tags: config[:tags]
 )
 
-statsd.increment('page.views')
+statsd.gauge('page.views', 1, sample_rate: 0.5)
+# statsd.increment('messages.count', by: 2, tags: ['kind:incoming'])

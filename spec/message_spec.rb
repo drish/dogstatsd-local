@@ -1,5 +1,6 @@
 require 'rspec'
 require 'json'
+
 require_relative '../lib/message'
 
 describe Message do
@@ -42,6 +43,19 @@ describe Message do
 
       expect(message[:tags].first).to eql('env:dev')
       expect(message[:tags][1]).to eql('region:toronto')
+    end
+  end
+
+  describe 'sample rate' do
+
+    it '#parse' do
+      metric = "default.page.views:1|g|@0.5|#env:dev,region:toronto"
+      message = Message.parse(metric)
+
+      expect(message[:namespace]).to eql('default')
+      expect(message[:name]).to eql('page.views')
+      expect(message[:value]).to eql(1)
+      expect(message[:sample_rate]).to eql(0.5)
     end
   end
 end
