@@ -2,6 +2,17 @@
 
 require 'datadog/statsd'
 
-statsd = Datadog::Statsd.new('server', 8125)
+config = {
+  host: 'localhost',
+  port: 8125,
+  namespace: 'default',
+  tags: ["env:dev", "region:toronto"]
+}
+
+statsd = Datadog::Statsd.new(config[:host],
+  config[:port],
+  namespace: config[:namespace],
+  tags: config[:tags]
+)
 
 statsd.increment('page.views')

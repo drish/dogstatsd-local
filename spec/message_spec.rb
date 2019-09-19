@@ -14,10 +14,6 @@ describe Message do
       expect(message[:name]).to eql('metric')
       expect(message[:value]).to eql(1)
     end
-
-    it '#log' do
-      metric = "namespace.metric:1|c|#test|extra"
-    end
   end
 
   describe 'sub_metric' do
@@ -30,9 +26,22 @@ describe Message do
       expect(message[:name]).to eql('metric.sub_metric')
       expect(message[:value]).to eql(1)
     end
+  end
 
-    it '#log' do
-      metric = "namespace.metric:1|c|#test|extra"
+  describe 'multi tags' do
+
+    it '#parse' do
+      metric = "default.page.views:1|c|#env:dev,region:toronto"
+      message = Message.parse(metric)
+
+      expect(message[:namespace]).to eql('default')
+      expect(message[:type]).to eql('c')
+      expect(message[:name]).to eql('page.views')
+      expect(message[:value]).to eql(1)
+      expect(message[:tags].count).to eql(2)
+
+      expect(message[:tags].first).to eql('env:dev')
+      expect(message[:tags][1]).to eql('region:toronto')
     end
   end
 end
