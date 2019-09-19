@@ -39,3 +39,8 @@ statsd.increment('page.views')
 ```sh
 server_1       | I, [2019-09-18T18:44:38.221440 #1]  INFO -- : {"path":"page.views","namespace":"page","name":"views","value":1}
 ```
+
+#### TODO
+
+- [ ] Sample Rating support
+- [ ] Events
