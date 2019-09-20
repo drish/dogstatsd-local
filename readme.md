@@ -13,7 +13,7 @@ docker-compose
 version: '3.4'
 
 services:
-  server:
+  dogstatsd-local:
     image: drish/dogstatsd-local
     ports:
       - 8125:8125/udp
@@ -31,13 +31,13 @@ Use your statsd client normally
 
 ```ruby
 require 'datadog/statsd'
-statsd = Datadog::Statsd.new('localhost', 8125)
+statsd = Datadog::Statsd.new('dogstatsd-local', 8125)
 statsd.increment('page.views')
 ```
 
 
 ```sh
-server_1       | I, [2019-09-18T18:44:38.221440 #1]  INFO -- : {"path":"page.views","namespace":"page","name":"views","value":1}
+[2019-09-18T18:44:38.221440 #1]  INFO -- : {"path":"page.views","namespace":"page","name":"views","value":1}
 ```
 
 #### TODO
