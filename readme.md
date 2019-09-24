@@ -42,5 +42,4 @@ statsd.increment('page.views')
 
 #### TODO
 
-- [ ] Sample Rating support
 - [ ] Events
